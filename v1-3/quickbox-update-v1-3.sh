@@ -104,7 +104,7 @@ LS
 
 function _complete() {
   echo "Update process ${green}COMPLETE${normal}"
-
+}
 
 _intro
 _askplex
