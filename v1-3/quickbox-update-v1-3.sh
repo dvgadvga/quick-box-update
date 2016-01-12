@@ -102,5 +102,12 @@ overssh         : ['ls', 'rsync','scp']
 LS
 }
 
+function _complete() {
+  echo "Update process ${green}COMPLETE${normal}"
 
 
+_intro
+_askplex
+_bashrc
+_lshell
+_complete
