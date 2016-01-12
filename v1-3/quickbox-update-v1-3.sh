@@ -61,8 +61,7 @@ function _askplex() {
     [yY] | [yY][Ee][Ss] )
     echo -n "Installing and Updating Plex ... "
       curl -o /srv/rutorrent/home/index.php https://raw.githubusercontent.com/JMSDOnline/quick-box-update/master/v1-3/index.php
-      mv index.php /srv/rutorrent/home
-      echo "ServerName ${HOSTNAME1}" | sudo tee /etc/apache2/conf-available/fqdn.conf
+      echo "ServerName ${HOSTNAME1}" | sudo tee /etc/apache2/conf-available/fqdn.conf >>"${OUTTO}" 2>&1
       sudo a2enconf fqdn >>"${OUTTO}" 2>&1
       touch /etc/apache2/sites-enabled/plex.conf
       chown www-data: /etc/apache2/sites-enabled/plex.conf
