@@ -7,7 +7,7 @@
 
 **Run the following command to grab our prep script and setup for install ...**
 ```
-https://raw.githubusercontent.com/JMSDOnline/quick-box-update/master/update-1-3.sh
+curl -LO https://raw.githubusercontent.com/JMSDOnline/quick-box-update/master/update-1-3.sh
 
 ```
 **... Finally, make the script executable and run to produce the updates ...**
