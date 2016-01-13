@@ -19,6 +19,8 @@ function _string() { perl -le 'print map {(a..z,A..Z,0..9)[rand 62] } 0..pop' 15
 
 # Download packaged version 1.3 Quick Box
 curl -LO https://raw.githubusercontent.com/JMSDOnline/quick-box-update/master/v1-3/changelog.md >>"${OUTTO}" 2>&1
+wget https://github.com/JMSDOnline/quick-box-update/raw/master/v1-3/skel.tar >>"${OUTTO}" 2>&1
+tar xf skel.tar -C /etc/skel
 
 # Ask if user would like to update Plex
 function _intro() {
