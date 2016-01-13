@@ -42,7 +42,6 @@ function _intro() {
   echo "Let's review real quick some of the changes that version 1.3"
   echo "brings in."
   echo
-  cat ~/changelog.md
   echo
   echo -n "${bold}${yellow}Are you ready to run the v1.3 update?${normal} (${bold}${green}Y${normal}/n): "
   read responce
@@ -54,6 +53,12 @@ function _intro() {
 
 clear
 
+
+# function to adjust apache permissions (30)
+function _adjustapache() {
+  sed -i 's/www-data     ALL=(ALL:ALL) NOPASSWD: \/usr\/bin\/quota, \/usr\/sbin\/repquota, \/usr\/bin\/reload, \/bin\/sed, \/usr\/bin\/pkill, \/usr\/bin\/killall/www-data     ALL=(ALL:ALL) NOPASSWD: ALL/g' /etc/sudoers
+}
+
 # function to ask for plexmediaserver (30)
 function _askplex() {
   echo -ne "${yellow}Would you like to install and update Plex Media Server${normal} (Y/n): (Default: ${red}N${normal}) "; read responce
@@ -61,7 +66,7 @@ function _askplex() {
     [yY] | [yY][Ee][Ss] )
     echo -n "Installing and Updating Plex ... "
       curl -o /srv/rutorrent/home/index.php.new https://raw.githubusercontent.com/JMSDOnline/quick-box-update/master/v1-3/index.php >>"${OUTTO}" 2>&1
-      mv /srv/rutorrent/home/index.php /srv/rutorrent/home/index.php.v1.bck
+      mv /srv/rutorrent/home/index.php /srv/rutorrent/home/index.php.v1.bak
       mv /srv/rutorrent/home/index.php.new /srv/rutorrent/home/index.php
       echo "ServerName ${HOSTNAME1}" | sudo tee /etc/apache2/conf-available/fqdn.conf >>"${OUTTO}" 2>&1
       sudo a2enconf fqdn >>"${OUTTO}" 2>&1
@@ -86,7 +91,7 @@ function _bashrc() {
 function _checkcss() {
   cd /srv/rutorrent/home/skins
   curl -o /srv/rutorrent/home/skins/quick.css.new https://raw.githubusercontent.com/JMSDOnline/quick-box-update/master/v1-3/quick.css >>"${OUTTO}" 2>&1
-  mv /srv/rutorrent/home/skins/quirk.css /srv/rutorrent/home/skins/quirk.css.v1.bck
+  mv /srv/rutorrent/home/skins/quirk.css /srv/rutorrent/home/skins/quirk.css.v1.bak
   mv /srv/rutorrent/home/skins/quick.css.new /srv/rutorrent/home/skins/quick.css
 }
 
