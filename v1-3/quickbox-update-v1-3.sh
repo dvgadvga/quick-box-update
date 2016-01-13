@@ -60,7 +60,9 @@ function _askplex() {
   case $responce in
     [yY] | [yY][Ee][Ss] )
     echo -n "Installing and Updating Plex ... "
-      curl -o /srv/rutorrent/home/index.php https://raw.githubusercontent.com/JMSDOnline/quick-box-update/master/v1-3/index.php >>"${OUTTO}" 2>&1
+      curl -o /srv/rutorrent/home/index.php.new https://raw.githubusercontent.com/JMSDOnline/quick-box-update/master/v1-3/index.php >>"${OUTTO}" 2>&1
+      mv /srv/rutorrent/home/index.php /srv/rutorrent/home/index.php.v1.bck
+      mv /srv/rutorrent/home/index.php.new /srv/rutorrent/home/index.php
       echo "ServerName ${HOSTNAME1}" | sudo tee /etc/apache2/conf-available/fqdn.conf >>"${OUTTO}" 2>&1
       sudo a2enconf fqdn >>"${OUTTO}" 2>&1
       touch /etc/apache2/sites-enabled/plex.conf
@@ -69,6 +71,7 @@ function _askplex() {
       curl http://shell.ninthgate.se/packages/shell-ninthgate-se-keyring.key >>"${OUTTO}" 2>&1 | sudo apt-key add - >>"${OUTTO}" 2>&1
       apt-get update >>"${OUTTO}" 2>&1
       apt-get install -qq --yes --force-yes plexmediaserver >>"${OUTTO}" 2>&1
+      service plexmediaserver restart >>"${OUTTO}" 2>&1
       echo "${OK}"
       ;;
     [nN] | [nN][Oo] | "") echo "${cyan}Skipping Plex install${normal} ... " ;;
@@ -78,6 +81,13 @@ function _askplex() {
 
 function _bashrc() {
   curl -LO https://raw.githubusercontent.com/JMSDOnline/quick-box-update/master/v1-3/.bashrc >>"${OUTTO}" 2>&1
+}
+
+function _checkcss() {
+  cd /srv/rutorrent/home/skins
+  curl -o /srv/rutorrent/home/skins/quick.css.new https://raw.githubusercontent.com/JMSDOnline/quick-box-update/master/v1-3/quick.css >>"${OUTTO}" 2>&1
+  mv /srv/rutorrent/home/skins/quirk.css /srv/rutorrent/home/skins/quirk.css.v1.bck
+  mv /srv/rutorrent/home/skins/quick.css.new /srv/rutorrent/home/skins/quick.css
 }
 
 function _lshell() {
@@ -102,11 +112,17 @@ LS
 }
 
 function _complete() {
+  for i in apache2 fail2ban vsftpd; do
+    service $i restart >>"${OUTTO}" 2>&1
+    systemctl enable $i >>"${OUTTO}" 2>&1
+  done
+
   echo "Update process ${green}COMPLETE${normal}"
 }
 
 _intro
 _askplex
 _bashrc
+_checkcss
 _lshell
 _complete
