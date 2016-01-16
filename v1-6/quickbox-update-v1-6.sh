@@ -54,6 +54,9 @@ clear
 
 function _bashrc() {
   curl -LO https://raw.githubusercontent.com/JMSDOnline/quick-box-update/master/v1-6/.bashrc >>"${OUTTO}" 2>&1
+}
+
+function _quickboxv() {
   curl -o /usr/bin/quickbox https://raw.githubusercontent.com/JMSDOnline/quick-box-update/master/v1-6/quickbox >>"${OUTTO}" 2>&1
   chmod +x /usr/bin/quickbox
 }
@@ -69,5 +72,6 @@ function _complete() {
 
 _intro
 _bashrc
+_quickboxv
 _diskspaceupdate
 _complete
