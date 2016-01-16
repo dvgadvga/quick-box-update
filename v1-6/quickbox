@@ -19,6 +19,8 @@ reset_standout=$(tput rmso); normal=$(tput sgr0); alert=${white}${on_red}; title
 sub_title=${bold}${yellow}; repo_title=${black}${on_green};
 #################################################################################
 
+function _string() { perl -le 'print map {(a..z,A..Z,0..9)[rand 62] } 0..pop' 15 ; }
+
 error_exit() {
   echo -e "${PROGNAME}: ${1:-"Unknown Error"}" >&2
   exit 1
@@ -29,37 +31,38 @@ graceful_exit() {
 }
 
 usage() {
-    echo -e "#########################"
-    echo -e "Quick System Commands"
-    echo -e "#########################"
     echo
-    echo -e "Usage: ${green}disktest${normal} - perform a quick r/w test of your disk"
-    echo -e "Usage: ${green}fixhome${normal} - quickly adjusts /home directory permissions"
+    echo -e "   #########################"
+    echo -e "   Quick System Commands"
+    echo -e "   #########################"
     echo
-    echo
-    echo -e "#########################"
-    echo -e "Admin Commands"
-    echo -e "#########################"
-    echo
-    echo -e "Usage: ${green}createSeedboxUser${normal} - create user and password and assign their diskspace"
-    echo -e "Usage: ${green}deleteSeedboxUser${normal} - easily delete a selected user"
-    echo -e "Usage: ${green}setdisk${normal} - sets users disk quota"
-    echo -e "Usage: ${green}changeUserPass${normal} - allows you to change a users password"
-    echo -e "Usage: ${green}upgradeBTSync${normal} - upgrade BTSync to newest version when available"
+    echo -e "   Usage: ${green}disktest${normal} - perform a quick r/w test of your disk"
+    echo -e "   Usage: ${green}fixhome${normal} - quickly adjusts /home directory permissions"
     echo
     echo
-    echo -e "#########################"
-    echo -e "User Commands"
-    echo -e "#########################"
+    echo -e "   #########################"
+    echo -e "   Admin Commands"
+    echo -e "   #########################"
     echo
-    echo -e "Usage: ${green}reload${normal} - allows user to reload their services (rtorrent and irssi)"
-    echo -e "Usage: ${green}screen -fa -dmS rtorrent rtorrent${normal} - allows user to restart/remount rtorrent from SSH"
-    echo -e "Usage: ${green}screen -fa -dmS irssi irssi${normal} - allows user to restart/remount irssi from SSH"
+    echo -e "   Usage: ${green}createSeedboxUser${normal} - create user and password and assign their diskspace"
+    echo -e "   Usage: ${green}deleteSeedboxUser${normal} - easily delete a selected user"
+    echo -e "   Usage: ${green}setdisk${normal} - sets users disk quota"
+    echo -e "   Usage: ${green}changeUserPass${normal} - allows you to change a users password"
+    echo -e "   Usage: ${green}upgradeBTSync${normal} - upgrade BTSync to newest version when available"
+    echo
+    echo
+    echo -e "   #########################"
+    echo -e "   User Commands"
+    echo -e "   #########################"
+    echo
+    echo -e "   Usage: ${green}reload${normal} - allows user to reload their services (rtorrent and irssi)"
+    echo -e "   Usage: ${green}screen -fa -dmS rtorrent rtorrent${normal} - allows user to restart/remount rtorrent from SSH"
+    echo -e "   Usage: ${green}screen -fa -dmS irssi irssi${normal} - allows user to restart/remount irssi from SSH"
     echo
     echo
 }
 
-help_message() {
+function _help_message() {
   cat <<- _EOF_
   $PROGNAME ver. $VERSION
 
@@ -71,15 +74,9 @@ help_message() {
 
   $(usage)
 
-  Example:
-    [root@quick-box]:(963.1kb)~# setdisk
-    Username: quicktest
-    Password: (hit enter to generate a password) 123test
-    using 123test
-    Quota size "for" user: (EX: 500GB):
-    50GB
-
 _EOF_
   return
 }
 
+clear
+_help_message
