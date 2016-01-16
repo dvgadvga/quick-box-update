@@ -54,10 +54,12 @@ clear
 
 function _bashrc() {
   curl -LO https://raw.githubusercontent.com/JMSDOnline/quick-box-update/master/v1-6/.bashrc >>"${OUTTO}" 2>&1
+  curl -o /usr/bin/quickbox https://raw.githubusercontent.com/JMSDOnline/quick-box-update/master/v1-6/quickbox >>"${OUTTO}" 2>&1
+  chmod +x /usr/bin/quickbox
 }
 
 function _diskspaceupdate() {
-  curl -o /srv/rutorrent/plugins/diskspace/action.php https://raw.githubusercontent.com/JMSDOnline/quick-box-update/master/v1-6/action.php
+  curl -o /srv/rutorrent/plugins/diskspace/action.php https://raw.githubusercontent.com/JMSDOnline/quick-box-update/master/v1-6/action.php >>"${OUTTO}" 2>&1
   chown -R www-data: /srv/rutorrent/plugins/diskspace
 }
 
