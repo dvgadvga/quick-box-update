@@ -1,3 +1,6 @@
+### A Preview of Quick Box
+[![Quick Box v1.6.5 Dashboard](http://img.youtube.com/vi/Nui3Gicc0mI/0.jpg)](http://www.youtube.com/watch?v=Nui3Gicc0mI)
+
 ## How to install
 > This script is valid for current Quick Box installs only. Please visit the Quick Box repo for the full installation kit.
 
