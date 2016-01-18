@@ -1,5 +1,5 @@
 ### A Preview of Quick Box
-[![Quick Box v1.6.5 Dashboard](https://raw.githubusercontent.com/JMSDOnline/quick-box-update/master/assets/quickbox-dasboard-preview.png)](http://www.youtube.com/watch?v=Nui3Gicc0mI)
+[![Quick Box v1.6.5 Dashboard](https://raw.githubusercontent.com/JMSDOnline/quick-box-update/master/assets/quickbox-dasboard-youtube-preview.png)](http://www.youtube.com/watch?v=Nui3Gicc0mI)
 
 ## How to install
 > This script is valid for current Quick Box installs only. Please visit the Quick Box repo for the full installation kit.
