@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# [Quick Box Update v1.6 Script]
+# [Quick Box Update Script]
 #
 # GitHub:   https://github.com/JMSDOnline/quick-box
 # Author:   Jason Matthews
@@ -9,8 +9,12 @@
 # 
 #################################################################################
 HOSTNAME1=$(hostname -s);
-VERSION="1.6"
-OUTTO="/root/quick-box-update-v1-6.log"
+UPDATEURL="/root/tmp/update/quick-box-update-2.0.7/"
+INETFACE=$(ifconfig | grep "Link encap" | sed 's/[ \t].*//;/^\(lo\|\)$/d' | awk '{ print $1 '});
+QBVERSION="2.0.7"
+RUTORRENT="/srv/rutorrent/"
+OUTTO="/root/quickbox-update.log"
+IP=$(curl -s http://ipecho.net/plain || curl -s http://ifconfig.me/ip ; echo)
 #################################################################################
 #Script Console Colors
 black=$(tput setaf 0); red=$(tput setaf 1); green=$(tput setaf 2); yellow=$(tput setaf 3); 
@@ -32,17 +36,12 @@ function _intro() {
   echo
   echo
   echo "${title} Welcome to the Quick Box update kit! ${normal}"
-  echo " version: ${VERSION}"
-  echo
-  echo "The version 1.6 update caters to fixing a few minor (yet annoying) bugs"
-  echo "that were occuring on multi-user intended environments. Additonal enhancements"
-  echo "such as adding additional built-in functions for tasks such as upgrading"
-  echo "included multi-media packages such as BTSync."
+  echo " version: ${QBVERSION}"
   echo
   echo "Updates will run silently. You can review the update log"
   echo "at ${OUTTO}."
   echo
-  echo -n "${bold}${yellow}Are you ready to run the v1.6 update?${normal} (${bold}${green}Y${normal}/n): "
+  echo -n "${bold}${yellow}Are you ready to run the update?${normal} (${bold}${green}Y${normal}/n): "
   read responce
   case $responce in
     [yY] | [yY][Ee][Ss] | "" ) update=yes ;;
@@ -52,26 +51,27 @@ function _intro() {
 
 clear
 
-function _bashrc() {
-  curl -LO https://raw.githubusercontent.com/JMSDOnline/quick-box-update/master/v1-6/.bashrc >>"${OUTTO}" 2>&1
-}
-
 function _quickboxv() {
-  curl -o /usr/bin/quickbox https://raw.githubusercontent.com/JMSDOnline/quick-box-update/master/v1-6/quickbox >>"${OUTTO}" 2>&1
+  curl -s -o /usr/bin/quickbox https://raw.githubusercontent.com/JMSDOnline/quick-box-update/master/quickbox
   chmod +x /usr/bin/quickbox
 }
 
-function _diskspaceupdate() {
-  curl -o /srv/rutorrent/plugins/diskspace/action.php https://raw.githubusercontent.com/JMSDOnline/quick-box-update/master/v1-6/action.php >>"${OUTTO}" 2>&1
-  chown -R www-data: /srv/rutorrent/plugins/diskspace
+function _indexupdate() {
+  cd "${RUTORRENT}home"
+  mv "${UPDATEURL}home/" /srv/rutorrent/
+  sed -i "s/eth0/${INETFACE}/g" /srv/rutorrent/home/index.php
+  sed -i "s/qb-version/${QBVERSION}/g" /srv/rutorrent/home/index.php
+  sed -i "s/ipaccess/${IP}/g" /srv/rutorrent/home/index.php
 }
 
 function _complete() {
   echo "Update process ${green}COMPLETE${normal}"
 }
 
+export DEBIAN_FRONTEND=noninteractive
+
+# QUICK BOX UPDATE STRUCTURE
 _intro
-_bashrc
 _quickboxv
-_diskspaceupdate
+_indexupdate
 _complete

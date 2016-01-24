@@ -368,7 +368,7 @@ break;
                 <li><a href="https://github.com/JMSDOnline/quick-box/issues"><i class="fa fa-warning text-warning"></i> Report an issue</a></li>
                 <div class="usermenu-div"></div>
                 <li><span style="font-size:10px;">You are running Quick Box <b>v<?php echo "$version"; ?></b></span></li>
-                <li><span style="font-size:10px;">Latest Quick Box Release: <b><a href="https://github.com/JMSDOnline/quick-box/releases/latest" target="_blank" rel="noindex,nofollow"><span style="color:#87D37C" id="version-result"></span></a></b></li>
+                <li><span style="font-size:10px;">Latest Quick Box Release: <b><a href="https://github.com/JMSDOnline/quick-box-update/releases/latest" target="_blank" rel="noindex,nofollow"><span style="color:#87D37C" id="version-result"></span></a></b></li>
               </ul>
             </div>
           </li>
