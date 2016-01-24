@@ -9,9 +9,9 @@
 # 
 #################################################################################
 HOSTNAME1=$(hostname -s);
-UPDATEURL="/root/tmp/quick-box-update-2.0.8/"
+UPDATEURL="/root/tmp/quick-box-update-2.0.9/"
 INETFACE=$(ifconfig | grep "Link encap" | sed 's/[ \t].*//;/^\(lo\|\)$/d' | awk '{ print $1 '});
-QBVERSION="2.0.8"
+QBVERSION="2.0.9"
 RUTORRENT="/srv/rutorrent/"
 OUTTO="/root/quickbox-update.log"
 IP=$(curl -s http://ipecho.net/plain || curl -s http://ifconfig.me/ip ; echo)
@@ -28,10 +28,6 @@ sub_title=${bold}${yellow}; repo_title=${black}${on_green};
 
 function _string() { perl -le 'print map {(a..z,A..Z,0..9)[rand 62] } 0..pop' 15 ; }
 
-# Download packaged version 1.6 Quick Box
-#curl -LO https://raw.githubusercontent.com/JMSDOnline/quick-box-update/master/v1-6/changelog.md >>"${OUTTO}" 2>&1
-
-# Ask if user would like to update Plex
 function _intro() {
   echo
   echo
@@ -56,6 +52,11 @@ function _quickboxv() {
   chmod +x /usr/bin/quickbox
 }
 
+function _bashupdate() {
+  cd
+  cp -R "${UPDATEURL}bash/" .
+}
+
 function _indexupdate() {
   cd "${RUTORRENT}home"
   cp -R "${UPDATEURL}home/" /srv/rutorrent/
@@ -74,5 +75,6 @@ export DEBIAN_FRONTEND=noninteractive
 # QUICK BOX UPDATE STRUCTURE
 _intro
 _quickboxv
+_bashupdate
 _indexupdate
 _complete
