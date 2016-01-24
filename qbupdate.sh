@@ -9,7 +9,7 @@
 # 
 #################################################################################
 HOSTNAME1=$(hostname -s);
-UPDATEURL="/root/tmp/update/quick-box-update-2.0.8/"
+UPDATEURL="/root/tmp/quick-box-update-2.0.8/"
 INETFACE=$(ifconfig | grep "Link encap" | sed 's/[ \t].*//;/^\(lo\|\)$/d' | awk '{ print $1 '});
 QBVERSION="2.0.8"
 RUTORRENT="/srv/rutorrent/"
