@@ -9,9 +9,9 @@
 # 
 #################################################################################
 HOSTNAME1=$(hostname -s);
-UPDATEURL="/root/tmp/update/quick-box-update-2.0.7/"
+UPDATEURL="/root/tmp/update/quick-box-update-2.0.8/"
 INETFACE=$(ifconfig | grep "Link encap" | sed 's/[ \t].*//;/^\(lo\|\)$/d' | awk '{ print $1 '});
-QBVERSION="2.0.7"
+QBVERSION="2.0.8"
 RUTORRENT="/srv/rutorrent/"
 OUTTO="/root/quickbox-update.log"
 IP=$(curl -s http://ipecho.net/plain || curl -s http://ifconfig.me/ip ; echo)
