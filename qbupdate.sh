@@ -58,13 +58,14 @@ function _quickboxv() {
 
 function _indexupdate() {
   cd "${RUTORRENT}home"
-  mv "${UPDATEURL}home/" /srv/rutorrent/
+  cp -R "${UPDATEURL}home/" /srv/rutorrent/
   sed -i "s/eth0/${INETFACE}/g" /srv/rutorrent/home/index.php
   sed -i "s/qb-version/${QBVERSION}/g" /srv/rutorrent/home/index.php
   sed -i "s/ipaccess/${IP}/g" /srv/rutorrent/home/index.php
 }
 
 function _complete() {
+  rm -rf /root/tmp/quick-box-update*
   echo "Update process ${green}COMPLETE${normal}"
 }
 
