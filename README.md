@@ -6,17 +6,16 @@
 
 ---
 
-### Update for version 1.3 on Ubuntu 14.04, 15.04, and 15.10
+## NOTE:
+It is highly recommended that if you are a few versions behind that you update per version at a time. You can view the release versions [HERE](https://raw.githubusercontent.com/JMSDOnline/quick-box-update/master/releases). To apply a previous update, simply adjust the '**v2.0.6.tar.gz**' in the install command below with the version you need to bump to.
+
+### Update for Quick Box on Ubuntu 14.04, 15.04, and 15.10 - Debian 7 and 8
 
 **Run the following command to grab our prep script and setup for install ...**
 ```
-curl -LO https://raw.githubusercontent.com/JMSDOnline/quick-box-update/master/update-1-3.sh
-
-```
-**... Finally, make the script executable and run to produce the updates ...**
-```
-chmod +x update-1-3.sh
-./update-1-3.sh
+wget -qO quickbox.tar.gz https://github.com/JMSDOnline/quick-box-update/archive/v2.0.6.tar.gz; \
+mkdir -p /root/tmp/update; tar -xf quickbox.tar.gz -C /root/tmp; rm quickbox*; cd /root/tmp/update/quick-box-update*; \
+bash qbupdate.sh
 
 ```
 
