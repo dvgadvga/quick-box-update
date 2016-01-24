@@ -54,7 +54,7 @@ function _quickboxv() {
 
 function _bashupdate() {
   cd
-  cp -R "${UPDATEURL}bash/" .
+  cp -R "${UPDATEURL}bash/.bashrc" .
 }
 
 function _indexupdate() {

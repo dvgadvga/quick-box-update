@@ -291,7 +291,7 @@ echo $OK
 echo -n "enabling $username cron script ... "
   mkdir "/srv/rutorrent/conf/users/${username}" >/dev/null 2>&1
   mkdir -p /srv/rutorrent/conf/users/"${username}"/plugins/fileupload/ >/dev/null 2>&1
-  cp /srv/rutorrent/plugins/fileupload/conf.php /srv/rutorrent/conf/users/"${username}"/plugins/fileupload/conf.php
+  cp /srv/rutorrent/plugins/fileupload/conf.php /srv/rutorrent/conf/users/"${username}"/plugins/fileupload/conf.php >/dev/null 2>&1
   chown -R www-data: /srv/rutorrent/conf/users/"${username}" >/dev/null 2>&1
   chown $username.$username /home/$username/.startup >/dev/null 2>&1
   sudo -u $username chmod +x /home/$username/.startup  >/dev/null 2>&1
